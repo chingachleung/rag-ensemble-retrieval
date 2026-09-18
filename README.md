@@ -1,5 +1,7 @@
 # rag-ensemble-retrieval
 
+[![tests](https://github.com/chingachleung/rag-ensemble-retrieval/actions/workflows/tests.yml/badge.svg)](https://github.com/chingachleung/rag-ensemble-retrieval/actions/workflows/tests.yml)
+
 A small, runnable retrieval-for-RAG pipeline: two lexical retrievers (BM25
 and TF-IDF/cosine), a score-ensemble that blends them and applies a
 business-logic boost, an optional LLM reranking pass, and a recall@k / MRR
@@ -60,6 +62,30 @@ python examples/run_demo.py
 ```
 
 No API key needed for the default run.
+
+### Example output
+
+```
+Corpus: 10 documents. Eval set: 10 labeled queries.
+
+retriever    recall@3      MRR
+BM25             1.00     0.82
+TF-IDF           1.00     0.82
+Ensemble         1.00     0.87
+
+Query: "what's the current refund policy"
+  BM25 top-1:     [d4] 'Refund policy (2023 archived version)' (source=archive)
+  Ensemble top-1: [d3] 'Refund policy' (source=docs)
+  -> The ensemble's archive penalty demotes the superseded 2023 policy doc
+     below the current one, even when lexical overlap alone would rank
+     them close together or reversed.
+```
+
+All three retrievers find the right document somewhere in their top 3 on
+this eval set (recall@3 = 1.00), but the ensemble's MRR is higher — it more
+often ranks the right document *first*, not just in the top 3 — and the
+refund-policy case above shows a concrete instance of BM25 getting the
+top-1 ranking wrong that the ensemble's business-logic penalty fixes.
 
 To try the LLM reranking pass over a retriever's top-k instead:
 
