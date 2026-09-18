@@ -1,0 +1,4 @@
+scikit-learn>=1.3
+rank-bm25>=0.2
+# Optional, only required if you activate LLMReranker:
+# anthropic>=0.30
