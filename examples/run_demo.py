@@ -1,6 +1,6 @@
 """End-to-end demo: compare BM25, TF-IDF, and the ensemble retriever on a
 small labeled eval set, then show a concrete case where the ensemble's
-business-logic boost (penalize archived docs) fixes a ranking mistake that
+business logic boost (penalize archived docs) fixes a ranking mistake that
 pure lexical scoring makes on its own.
 """
 from __future__ import annotations
