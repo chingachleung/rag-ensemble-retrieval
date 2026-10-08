@@ -27,6 +27,7 @@ def test_bm25_retriever_returns_k_results():
 def test_bm25_retriever_finds_obviously_relevant_doc_top1():
     retriever = BM25Retriever(DOCUMENTS)
     results = retriever.retrieve("what is the API rate limit", k=1)
+    
     assert results[0].doc.doc_id == "d9"
 
 
