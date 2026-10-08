@@ -2,7 +2,7 @@
 
 Retrieval (BM25/TF-IDF/ensemble) is cheap and runs over the whole corpus;
 reranking is expensive and only makes sense over a short candidate list.
-`LLMReranker` is real, complete integration code for that second pass --
+`LLMReranker` is real, complete integration code for that second pass -
 inactive by default (no bundled API key), same pattern as the other repos
 in this portfolio.
 """
